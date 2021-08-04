@@ -16,8 +16,20 @@
           {{ ticket.support }}
         </v-card-text>
         <v-card-actions>
-          <v-btn class="green--text" text>Edit</v-btn>
-          <v-btn class="purple--text" text>Solve Ticket</v-btn>
+          <v-btn 
+            class="green--text 
+              text-md-body-1 
+              font-weight-medium" 
+              text>
+              Edit
+          </v-btn>
+          <v-btn 
+            class="purple--text 
+              text-md-body-1 
+              font-weight-medium" 
+              text>
+              Solve Ticket
+          </v-btn>
         </v-card-actions>
       </v-container>
     </v-card> 
