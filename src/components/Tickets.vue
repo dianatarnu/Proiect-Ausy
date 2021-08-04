@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="mx-auto"
+      class="mx-auto my-20"
       max-width="35%"
       outlined
       v-for="(ticket, id) in tickets"

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-title>
+      <v-card-title class="text-h1">
         Active Tickets
         <v-spacer></v-spacer>
         <v-btn>New Ticket</v-btn>
@@ -26,6 +26,5 @@ export default {
     Tickets, 
     Filters
   }
-
 }
 </script>
