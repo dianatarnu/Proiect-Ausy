@@ -1,11 +1,14 @@
 <template>
   <v-card 
-    max-width="90%"
+    max-width="85%"
     class="mx-auto ma-10">
     <v-card-title class="text-h3 pa-10">
       Active Tickets
       <v-spacer></v-spacer>
-      <v-btn class="float-right white--text purple">New Ticket</v-btn>
+      <v-btn 
+        class="float-right white--text purple"
+        @click="addNewTicket">
+        New Ticket</v-btn>
     </v-card-title>
     <v-divider class="mb-5"></v-divider>
     <v-card-text>
@@ -27,5 +30,10 @@
       Tickets,
       Filters
     },
+    methods: {
+      addNewTicket() {
+        this.$router.push('/newTicket')
+      }
+    }
   }
 </script>

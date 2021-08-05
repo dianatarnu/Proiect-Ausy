@@ -1,7 +1,10 @@
 <template>
   <div>
     <v-card
-      class="mx-auto my-20"
+      class="mx-auto 
+        my-20
+        mb-5
+        rounded-lg"
       max-width="35%"
       outlined
       v-for="(ticket, id) in tickets"
@@ -27,7 +30,8 @@
             class="purple--text 
               text-md-body-1 
               font-weight-medium" 
-              text>
+              text
+              @click="onSolvedTicket(ticket.id)">
               Solve Ticket
           </v-btn>
         </v-card-actions>
@@ -41,7 +45,15 @@
     name: 'Tickets',
     computed: {
       tickets() {
-        return this.$store.state.tickets;
+        return this.$store.getters.getTickets.filter(
+          ticket => ticket.status === "Assigned"
+        );
+      }
+    }, 
+    methods: {
+      onSolvedTicket(id) {
+        this.$router.push('/solvedtickets')
+        this.$store.dispatch("solve_ticket", id);
       }
     }
   }
