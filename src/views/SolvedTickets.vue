@@ -1,8 +1,12 @@
 <template>
-  <div class="about">
-    <h1>Solved Tickets</h1>
-    <Tickets />
-  </div>
+  <v-container>
+    <v-card max-width="85%" class="mx-auto ma-5">
+      <v-card-title class="text-h4 justify-center">  
+        Solved Tickets
+      </v-card-title>
+      <Tickets />
+    </v-card>
+  </v-container>
 </template>
 
 <script>

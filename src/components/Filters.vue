@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="85%">
     <v-card-title 
-      class="text-h4">
+      class="text-5">
       Filters
     </v-card-title>
   </v-card>

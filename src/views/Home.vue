@@ -1,8 +1,8 @@
 <template>
   <v-card 
     max-width="85%"
-    class="mx-auto ma-10">
-    <v-card-title class="text-h3 pa-10">
+    class="mx-auto ma-5">
+    <v-card-title class="text-h4 px-10 py-5">
       Active Tickets
       <v-spacer></v-spacer>
       <v-btn 
