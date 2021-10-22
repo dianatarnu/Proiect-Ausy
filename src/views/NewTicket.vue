@@ -10,39 +10,33 @@
                 <v-card-title class="text-h4 justify-center">New Ticket</v-card-title>
                 <v-text-field 
                     class="mx-10"
-                    label="Title"
-                    v-model="newTicket.title"
+                    label="Subject"
+                    v-model="newTicket.Subject"
                     :rules="rule"
                     required
                 />
                 <v-text-field 
                     class="mx-10"
-                    label="Type"
-                    v-model="newTicket.type"
+                    label="Description"
+                    v-model="newTicket.Description"
                     :rules="rule"
                     required
                 />
                 <v-text-field
                     class="mx-10" 
-                    label="Client"
-                    v-model="newTicket.client"
+                    label="Status"
+                    v-model="newTicket.Status"
                     :rules="rule"
                     required
                 />
                 <v-text-field 
                     class="mx-10"
-                    label="Support"
-                    v-model="newTicket.support"
+                    label="Priority"
+                    v-model="newTicket.Priority"
                     :rules="rule"
                     required
                 />
-                <v-select
-                    class="mx-10"
-                    :items="status"
-                    label="Status"
-                    v-model="newTicket.status"
-                    required
-                />
+                
             </v-form>
             <v-card-actions class="justify-center">
                 <v-btn
@@ -64,12 +58,13 @@ export default ({
     data:() => ({
         valid:true,
         newTicket: {
-            title: '',
-            type: '',
-            client:'',
-            support: '',
+            Subject: '',
+            Description: '',
+            Status:'',
+            Priority: '',
+            AssignedUserId: 1,
+            AdminUserId: 4
         },
-        status: ['Assigned', 'Solved'],
         rule: [v=>!!v || 'Input is required']
     }),
     computed: {
@@ -79,7 +74,6 @@ export default ({
     },
     methods: {
         onSubmit() {
-            this.newTicket.id = this.$store.state.length + 1;
             this.$store.dispatch('add_new_ticket', this.newTicket );
             this.$router.push('/')
         }
