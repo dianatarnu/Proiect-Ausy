@@ -20,7 +20,7 @@ export default new Vuex.Store({
         async add_new_ticket (_, data) {
             await Axios({
                 method: "post",
-                headers: {Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJkaWFuYSIsIm5iZiI6MTYzNDgyMDM0NywiZXhwIjoxNjM0OTA2NzQ3LCJpYXQiOjE2MzQ4MjAzNDd9.8fkybQR04pir5Vq-UkpgI87ZVnFjle9zOERSGyKZKLgyqSa2aEhaamMvfo3lJohFahnVujGKnTu2TuYe63rEJQ"},
+                headers: {Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJkaWFuYSIsIm5iZiI6MTYzNTE1MjQwMCwiZXhwIjoxNjM1MjM4ODAwLCJpYXQiOjE2MzUxNTI0MDB9.2w3WSNezGo7RCbcUDv2sW0Ob4NJ48jgb2_tgEJDg09lnECCc_lR0_SCkqyYCx-QsSXcjSJ3O_2kCZvS28j9IaA"},
                 url: "https://localhost:5001/Ticket",
                 data: data
             })
@@ -28,13 +28,36 @@ export default new Vuex.Store({
         async get_tickets_from_api ({commit}) {
             const response = await Axios({
                 method: "get",
-                headers: {Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJkaWFuYSIsIm5iZiI6MTYzNDgyMDM0NywiZXhwIjoxNjM0OTA2NzQ3LCJpYXQiOjE2MzQ4MjAzNDd9.8fkybQR04pir5Vq-UkpgI87ZVnFjle9zOERSGyKZKLgyqSa2aEhaamMvfo3lJohFahnVujGKnTu2TuYe63rEJQ"},
+                headers: {Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJkaWFuYSIsIm5iZiI6MTYzNTE1MjQwMCwiZXhwIjoxNjM1MjM4ODAwLCJpYXQiOjE2MzUxNTI0MDB9.2w3WSNezGo7RCbcUDv2sW0Ob4NJ48jgb2_tgEJDg09lnECCc_lR0_SCkqyYCx-QsSXcjSJ3O_2kCZvS28j9IaA"},
                 url: "https://localhost:5001/Ticket/GetAll"
             })
             if(response.status == 200){
                 commit("getTicketsFromApi", response.data.data)
                 console.log(response.data.data)
             }
+        },
+
+        async edit_ticket(_, data) {
+            await Axios({
+                method: "PUT",
+                headers: {Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJkaWFuYSIsIm5iZiI6MTYzNTE1MjQwMCwiZXhwIjoxNjM1MjM4ODAwLCJpYXQiOjE2MzUxNTI0MDB9.2w3WSNezGo7RCbcUDv2sW0Ob4NJ48jgb2_tgEJDg09lnECCc_lR0_SCkqyYCx-QsSXcjSJ3O_2kCZvS28j9IaA"},
+                url: "https://localhost:5001/Ticket",
+                data: data
+            })
+        }, 
+        async delete_ticket({commit},id) {
+            const response = await Axios({
+                method: "DELETE",
+                headers: {Authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJkaWFuYSIsIm5iZiI6MTYzNTE1MjQwMCwiZXhwIjoxNjM1MjM4ODAwLCJpYXQiOjE2MzUxNTI0MDB9.2w3WSNezGo7RCbcUDv2sW0Ob4NJ48jgb2_tgEJDg09lnECCc_lR0_SCkqyYCx-QsSXcjSJ3O_2kCZvS28j9IaA"},
+                url: "https://localhost:5001/Ticket/${id}",
+                data: {
+                    ticket_id: id
+                }
+            })
+            if(response.status == 200) {
+                commit("deleteTicket", response.data)
+            }
+
         }
     },
     mutations: {
@@ -50,6 +73,13 @@ export default new Vuex.Store({
         },
         getTicketsFromApi(state, payload){
             state.tickets = payload;
+        },
+        setEditedTicket(state, id) {
+            state.tickets.push(id)
+        },
+        deleteTicket(state, id) {
+            const index = state.tickets.indexOf(id)
+            state.tickets.splice(index,id)
         }
     }
 })

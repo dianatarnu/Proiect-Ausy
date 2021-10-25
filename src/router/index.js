@@ -11,6 +11,16 @@ const routes = [
     component: Home
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue')
+  },
+  {
     path: '/solvedtickets',
     name: 'SolvedTickets',
     component: () => import('../views/SolvedTickets.vue')
@@ -19,6 +29,11 @@ const routes = [
     path: '/newticket',
     name: 'NewTicket',
     component: () => import('../views/NewTicket.vue')
+  },
+  {
+    path: '/editticket',
+    name: 'EditTicket',
+    component: () => import('../views/EditTicket.vue')
   }
 ]
 

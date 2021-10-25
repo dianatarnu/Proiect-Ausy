@@ -5,27 +5,40 @@
         my-20
         mb-5
         rounded-lg"
-      max-width="35%"
+      elevation="4"
+      max-width="45%"
       outlined
       v-for="(ticket, id) in tickets"
       :key="id"
     >
-      <v-container>
-        <v-card-title class="text-h5 font-weight-medium" >{{ ticket.subject }}</v-card-title>
-        <v-card-subtitle class="grey--text">{{ ticket.description }}</v-card-subtitle>
-        <v-card-subtitle class="grey--text">{{ ticket.id }}</v-card-subtitle>
-        <v-card-subtitle class="grey--text">{{ ticket.adminUserId }}</v-card-subtitle>
-        <v-card-subtitle class="grey--text">{{ ticket.assignedUserId }}</v-card-subtitle>
-        <v-card-subtitle class="grey--text">{{ ticket.priority }}</v-card-subtitle>
-        <v-card-subtitle class="grey--text">{{ ticket.status }}</v-card-subtitle>
-        <v-card-subtitle class="grey--text">{{ ticket.creationDate }}</v-card-subtitle>
+      <v-container class="py-5" >
+        <v-card-actions class="justify-end">
+          <v-btn 
+            class="black--text 
+              text-md-body-1 
+              font-weight-medium" 
+              text
+              @click="onDeleteTicket(id)">
+              X
+          </v-btn>
+        </v-card-actions>
 
-        <v-card-actions>
+        <v-card-title class="text-h5 font-weight-medium justify-center pb-10" >Subject: {{ ticket.subject }}</v-card-title>
+        <v-card-subtitle class="text-subtitle-1 grey--text py-1">Description: {{ ticket.description }}</v-card-subtitle>
+        <v-card-subtitle class="text-subtitle-1 grey--text py-1">Ticket Id: {{ ticket.id }}</v-card-subtitle>
+        <v-card-subtitle class="text-subtitle-1 grey--text py-1">Admin Id: {{ ticket.adminUserId }}</v-card-subtitle>
+        <v-card-subtitle class="text-subtitle-1 grey--text py-1">Assigned User Id: {{ ticket.assignedUserId }}</v-card-subtitle>
+        <v-card-subtitle class="text-subtitle-1 grey--text py-1">Priority: {{ ticket.priority }}</v-card-subtitle>
+        <v-card-subtitle class="text-subtitle-1 grey--text py-1">Status: {{ ticket.status }}</v-card-subtitle>
+        <v-card-subtitle class="text-subtitle-1 grey--text py-1">Creation Date:{{ ticket.creationDate }}</v-card-subtitle>
+
+        <v-card-actions class="justify-end">
           <v-btn 
             class="green--text 
               text-md-body-1 
               font-weight-medium" 
-              text>
+              text
+              @click="editTicket">
               Edit
           </v-btn>
           <v-btn 
@@ -36,6 +49,7 @@
               @click="onSolvedTicket(ticket.id)">
               Solve Ticket
           </v-btn>
+
         </v-card-actions>
       </v-container>
     </v-card> 
@@ -54,6 +68,15 @@
       onSolvedTicket(id) {
         this.$router.push('/solvedtickets')
         this.$store.dispatch("solve_ticket", id);
+      },
+      editTicket() {
+        this.$router.push('/editTicket')
+        this.$store.dispatch("edit_ticket");
+      },
+      onDeleteTicket(id) {
+        // const ticketIndex = this.tickets.indexOf(ticket)
+        // this.tickets.splice(ticketIndex, 1)
+        this.$store.dispatch("delete_ticket", id)
       }
     },
     created() {
